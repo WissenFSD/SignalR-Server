@@ -32,13 +32,7 @@ var app = builder.Build();
 
 // Dýþarýdan gelen paketler http//localhost:5050/wissen
 // Signal R'in ayný web socketteki gibi hizmet vereceði bir adres olacaktýr. Bu adresi Aspnet Core uygulamasýna Register etmek için bir endpoint ekliyoruz.
-app.UseEndpoints(endpoints =>
-{
 
-
-	endpoints.MapHub<MessageHub>("/wissen");
-	//endpoints.MapControllers();
-});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -54,4 +48,11 @@ app.MapControllers();
 app.UseCors("Cors");
 
 
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapHub<MessageHub>("/wissen");
+	//endpoints.MapControllers();
+});
 app.Run();
