@@ -6,7 +6,7 @@ namespace SignalR.SignalR
 	{
 		public async Task SendName(string name)
 		{
-			await Clients.All.SendAsync("Name :"+name);
+			await Clients.All.SendAsync("Name", name);
 		}
 	}
 }
