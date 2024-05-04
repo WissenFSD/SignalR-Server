@@ -1,0 +1,57 @@
+using SignalR.SignalR;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+//Signal R Kullanacaðýz
+builder.Services.AddSignalR();
+
+// Cors ekleyelim
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("Cors", builder =>
+	{
+
+		builder.WithOrigins("http://localhost:1010", "http://localhost:2020").
+		AllowAnyHeader().
+		AllowAnyMethod().
+		AllowCredentials();
+
+	});
+});
+
+var app = builder.Build();
+
+
+
+// Dýþarýdan gelen paketler http//localhost:5050/wissen
+// Signal R'in ayný web socketteki gibi hizmet vereceði bir adres olacaktýr. Bu adresi Aspnet Core uygulamasýna Register etmek için bir endpoint ekliyoruz.
+app.UseEndpoints(endpoints =>
+{
+
+
+	endpoints.MapHub<MessageHub>("/wissen");
+	//endpoints.MapControllers();
+});
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+	app.UseSwagger();
+	app.UseSwaggerUI();
+}
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+
+app.UseCors("Cors");
+
+
+app.Run();
