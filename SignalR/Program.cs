@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 	options.AddPolicy("Cors", builder =>
 	{
 
-		builder.WithOrigins("http://localhost:1010", "http://localhost:2020").
+		builder.WithOrigins("http://localhost:5063").
 		AllowAnyHeader().
 		AllowAnyMethod().
 		AllowCredentials();
@@ -42,7 +42,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
 
 
 app.UseCors("Cors");
@@ -53,6 +53,7 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
 	endpoints.MapHub<MessageHub>("/wissen");
-	//endpoints.MapControllers();
+	endpoints.MapControllers();
 });
+
 app.Run();
