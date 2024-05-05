@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Infrastructure;
+﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.SignalR;
 using System;
 
@@ -18,13 +18,12 @@ namespace SignalR.Controllers
 
         [HttpGet]
 		[Route("SendMessage")]
-		public async IActionResult Index()
+		public async Task Index()
 		{
 			//var connectionManager = GlobalHost.ConnectionManager.GetHubContext<MessageHub>();
 			//connectionManager.Clients.All.addmessage("Merhaba");
 			//connectionManager.Clients.
-			await _context.Clients.SendAsync("Mesaj");
-			return Ok();
+		 await _context.Clients.All.SendAsync("Mesaj");
 		}
 	}
 }

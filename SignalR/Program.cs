@@ -1,4 +1,4 @@
-using Microsoft.AspNet.SignalR;
+
 using Microsoft.AspNetCore.SignalR;
 using SignalR.SignalR;
 
@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 //Signal R Kullanacaðýz
 builder.Services.AddSignalR();
-builder.Services.AddSingleton<IHubContext<MessageHub>, HubContext<MessageHub>>();
+//builder.Services.AddSingleton<IHubContext<MessageHub>, HubContext<MessageHub>>();
 
 // Cors ekleyelim
 builder.Services.AddCors(options =>
