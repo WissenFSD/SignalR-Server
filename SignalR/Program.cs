@@ -1,3 +1,5 @@
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 //Signal R Kullanacaðýz
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<IHubContext<MessageHub>, HubContext<MessageHub>>();
 
 // Cors ekleyelim
 builder.Services.AddCors(options =>
@@ -28,6 +31,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.Services.GetService(typeof(Microsoft.AspNet.SignalR.IHubContext<MessageHub>));
 
 
 // Dýþarýdan gelen paketler http//localhost:5050/wissen
