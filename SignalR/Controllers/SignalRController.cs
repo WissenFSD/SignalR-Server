@@ -18,12 +18,12 @@ namespace SignalR.Controllers
 
         [HttpGet]
 		[Route("SendMessage")]
-		public async Task Index()
+		public async Task Index(string message)
 		{
 			//var connectionManager = GlobalHost.ConnectionManager.GetHubContext<MessageHub>();
 			//connectionManager.Clients.All.addmessage("Merhaba");
 			//connectionManager.Clients.
-		 await _context.Clients.All.SendAsync("Mesaj");
+			await _context.Clients.All.SendAsync("Name", message);
 		}
 	}
 }
