@@ -20,8 +20,14 @@ builder.Services.AddCors(options =>
 {
 	options.AddPolicy("Cors", builder =>
 	{
+		//Kendi  bilgisayarýnýzda çalýþma
+		//builder.WithOrigins("http://localhost:5063").
+		//AllowAnyHeader().
+		//AllowAnyMethod().
+		//AllowCredentials();
 
-		builder.WithOrigins("http://localhost:5063").
+
+		builder.WithOrigins("http://wissenclient.runasp.net","http://localhost:5063").
 		AllowAnyHeader().
 		AllowAnyMethod().
 		AllowCredentials();
